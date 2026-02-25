@@ -1,6 +1,7 @@
 //GOAL CREATE ROCK PAPER SCISSORS
 let humanScore = 0;
 let computerScore = 0;
+
 function getComputerChoice() {
   let randomChoiceno = Math.floor(Math.random() * 3);
   let computerChoiceNo = randomChoiceno;
@@ -22,4 +23,24 @@ function getHumanChoice() {
   return prompt("choose 'rock' 'paper' or 'scissors'");
 }
 
+function playRound(humanChoice, computerChoice) {
+  let result = "";
+  if (humanChoice === computerChoice) {
+    result = "Tie! No points awarded.";
+  } else {
+    result = determineResult(humanChoice, computerChoice);
+  }
+
+  console.log(result);
+}
+
+function determineResult(humanChoice, computerChoice) {
+  if (humanChoice === "rock" && computerChoice === "scissors" ||
+    humanChoice === "scissors" && computerChoice === "paper" ||
+    humanChoice === "paper" && computerChoice === "rock") {
+    return `You win! ${humanChoice} beats ${computerChoice}`;
+  } else {
+    return `You lose! ${computerChoice} beats ${humanChoice}`;
+  }
+}
 
