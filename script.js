@@ -20,7 +20,7 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-  return prompt("choose 'rock' 'paper' or 'scissors'");
+  return prompt("choose 'rock' 'paper' or 'scissors'").toLowerCase();
 }
 
 function playRound(humanChoice, computerChoice) {
@@ -38,9 +38,15 @@ function determineResult(humanChoice, computerChoice) {
   if (humanChoice === "rock" && computerChoice === "scissors" ||
     humanChoice === "scissors" && computerChoice === "paper" ||
     humanChoice === "paper" && computerChoice === "rock") {
+    humanScore++;
     return `You win! ${humanChoice} beats ${computerChoice}`;
   } else {
+    computerScore++;
     return `You lose! ${computerChoice} beats ${humanChoice}`;
   }
 }
 
+const humanSelection = getHumanChoice();
+const computerSelection = getComputerChoice();
+
+playRound(humanSelection, computerSelection);
