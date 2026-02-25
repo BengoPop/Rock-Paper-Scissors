@@ -53,11 +53,11 @@ function playGame() {
     playRound(getHumanChoice(), getComputerChoice());
   }
   if (humanScore === computerScore) {
-    console.log("Tie! No winner.");
+    console.log("Tie! No ultimate winner.");
   } else if (humanScore > computerScore) {
-    console.log("You Win!");
+    console.log("You Win! You are the ultimate winner!");
   } else {
-    console.log("You lose!");
+    console.log("You lose! You are the ultimate loser!");
   }
 }
 
