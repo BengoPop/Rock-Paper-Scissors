@@ -46,7 +46,19 @@ function determineResult(humanChoice, computerChoice) {
   }
 }
 
-const humanSelection = getHumanChoice();
-const computerSelection = getComputerChoice();
+function playGame() {
+  humanScore = 0;
+  computerScore = 0;
+  for (i = 0; i < 5; i++) {
+    playRound(getHumanChoice(), getComputerChoice());
+  }
+  if (humanScore === computerScore) {
+    console.log("Tie! No winner.");
+  } else if (humanScore > computerScore) {
+    console.log("You Win!");
+  } else {
+    console.log("You lose!");
+  }
+}
 
-playRound(humanSelection, computerSelection);
+playGame();
