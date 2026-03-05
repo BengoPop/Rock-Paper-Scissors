@@ -2,6 +2,29 @@
 let humanScore = 0;
 let computerScore = 0;
 
+
+function updateHumanScoreDiv() {
+  humanScoreDiv.textContent = `human:${humanScore}`
+}
+function updateCompScoreDiv() {
+  compScoreDiv.textContent = `comp:${computerScore}`
+}
+const humanScoreDiv = document.querySelector(".humanScore")
+const compScoreDiv = document.querySelector(".compScore")
+updateHumanScoreDiv();
+updateCompScoreDiv();
+
+const rock = document.querySelector("#rock");
+const paper = document.querySelector("#paper");
+const scissors = document.querySelector("#scissors");
+
+const winnerTitle = document.querySelector(".winnerBoard");
+const results = document.querySelector(".matchResults")
+
+rock.addEventListener("click", (e) => playRound("rock", getComputerChoice()));
+paper.addEventListener("click", (e) => playRound("paper", getComputerChoice()));
+scissors.addEventListener("click", (e) => playRound("scissors", getComputerChoice()));
+
 function getComputerChoice() {
   let randomChoiceno = Math.floor(Math.random() * 3);
   let computerChoiceNo = randomChoiceno;
@@ -19,8 +42,8 @@ function getComputerChoice() {
   }
 }
 
-function getHumanChoice() {
-  return prompt("choose 'rock' 'paper' or 'scissors'").toLowerCase();
+function getHumanChoice(choice) {
+  return choice;
 }
 
 function playRound(humanChoice, computerChoice) {
@@ -31,7 +54,7 @@ function playRound(humanChoice, computerChoice) {
     result = determineResult(humanChoice, computerChoice);
   }
 
-  console.log(result);
+  results.textContent = result;
 }
 
 function determineResult(humanChoice, computerChoice) {
@@ -39,26 +62,27 @@ function determineResult(humanChoice, computerChoice) {
     humanChoice === "scissors" && computerChoice === "paper" ||
     humanChoice === "paper" && computerChoice === "rock") {
     humanScore++;
-    return `You win! ${humanChoice} beats ${computerChoice}`;
+
+    humanScoreDiv.textContent = `human:${humanScore}`
+    checkWinner();
+    return `${humanChoice} beats ${computerChoice} +1 pt human`;
   } else {
     computerScore++;
-    return `You lose! ${computerChoice} beats ${humanChoice}`;
+    compScoreDiv.textContent = `comp:${computerScore}`
+    checkWinner();
+    return `${computerChoice} beats ${humanChoice} +1 pt computer`;
   }
 }
 
-function playGame() {
-  humanScore = 0;
-  computerScore = 0;
-  for (i = 0; i < 5; i++) {
-    playRound(getHumanChoice(), getComputerChoice());
+function checkWinner() {
+  if (humanScore > 4 || computerScore > 4) {
+    if (humanScore > computerScore) {
+      winnerTitle.textContent = ("You Win! You are the ultimate winner!");
+    } else {
+      winnerTitle.textContent = ("You lose! You are the ultimate loser!");
+    }
   }
-  if (humanScore === computerScore) {
-    console.log("Tie! No ultimate winner.");
-  } else if (humanScore > computerScore) {
-    console.log("You Win! You are the ultimate winner!");
-  } else {
-    console.log("You lose! You are the ultimate loser!");
-  }
+
 }
 
-playGame();
+
